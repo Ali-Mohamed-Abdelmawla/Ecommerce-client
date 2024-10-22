@@ -4,7 +4,7 @@ A test task implementation for Scandiweb featuring a single-page e-commerce appl
 
 ## Frontend Features
 - React Class Components
-- Vite/CRA
+- Vite
 - GraphQL Integration
 - Custom CSS Implementation (No UI Libraries)
 - Figma Design Implementation
