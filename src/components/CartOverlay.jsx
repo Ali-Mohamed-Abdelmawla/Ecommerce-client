@@ -28,9 +28,11 @@ class CartOverlay extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.isOpen !== prevProps.isOpen) {
       if (this.props.isOpen) {
+        // Scroll to top when cart opens
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
         // When opening, render immediately and trigger animation
         this.setState({ isRendered: true }, () => {
-          // Use requestAnimationFrame to ensure DOM has updated
           requestAnimationFrame(() => {
             this.setState({ isVisible: true });
           });
@@ -38,13 +40,11 @@ class CartOverlay extends Component {
       } else {
         // When closing, start animation first
         this.setState({ isVisible: false });
-        // Then remove from DOM after animation completes
         setTimeout(() => {
           if (!this.props.isOpen) {
-            // Double check we're still supposed to be closed
             this.setState({ isRendered: false });
           }
-        }, 300); // Match the duration in your CSS transition
+        }, 300);
       }
     }
   }

@@ -210,6 +210,7 @@ class ProductDetails extends Component {
 
           const product = data.product;
           const { gallery } = product;
+          const hasMultipleImages = gallery.length > 1;
 
           return (
             <div
@@ -243,57 +244,63 @@ class ProductDetails extends Component {
                   </div>
                   {/* Main image */}
                   <div className="main-image relative flex-grow">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        this.prevImage(gallery.length);
-                      }}
-                      className="absolute left-0 top-1/2 transform -translate-y-1/2 
+                    {/* previous image button */}
+                    {hasMultipleImages && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          this.prevImage(gallery.length);
+                        }}
+                        className="absolute left-0 top-1/2 transform -translate-y-1/2 
                         bg-black bg-opacity-50 p-1 sm:p-2 text-white"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-4 h-4 sm:w-6 sm:h-6"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 19l-7-7 7-7"
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          className="w-4 h-4 sm:w-6 sm:h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 19l-7-7 7-7"
+                          />
+                        </svg>
+                      </button>
+                    )}
                     <img
                       src={gallery[this.state.currentImageIndex].image_url}
                       alt={product.name}
                       className="w-full rounded shadow-md"
                     />
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        this.nextImage(gallery.length);
-                      }}
-                      className="absolute right-0 top-1/2 transform -translate-y-1/2 
+                    {/* next image button */}
+                    {hasMultipleImages && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          this.nextImage(gallery.length);
+                        }}
+                        className="absolute right-0 top-1/2 transform -translate-y-1/2 
                         bg-black bg-opacity-50 p-1 sm:p-2 text-white"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-4 h-4 sm:w-6 sm:h-6"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          className="w-4 h-4 sm:w-6 sm:h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+                    )}
                   </div>
                 </div>
 
