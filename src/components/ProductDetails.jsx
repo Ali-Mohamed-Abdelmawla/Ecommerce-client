@@ -212,7 +212,10 @@ class ProductDetails extends Component {
           const { gallery } = product;
 
           return (
-            <div className="container mx-auto px-4 py-4 sm:py-8">
+            <div
+              className="container mx-auto px-4 py-4 sm:py-8"
+              data-testid={`product-${product.id}`}
+            >
               <div className="flex flex-col md:flex-row gap-4 sm:gap-8">
                 {/* Product Gallery */}
                 <div
