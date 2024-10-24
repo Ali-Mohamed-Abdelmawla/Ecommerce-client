@@ -132,10 +132,8 @@ class CartOverlay extends Component {
       itemCount,
       onOrderPlaced,
     } = this.props;
-    const { isRendered } = this.state;
 
-    if (!isRendered) return null;
-
+    // Always render the component, but control visibility with CSS
     return (
       <Mutation
         mutation={CREATE_ORDER_MUTATION}
@@ -145,10 +143,13 @@ class CartOverlay extends Component {
       >
         {(createOrder, { loading, error }) => (
           <div
+            data-testid="cart-overlay"
             className={`fixed right-0 sm:right-4 top-14 z-50 w-full sm:w-96 max-h-[calc(100vh-5rem)] 
               overflow-y-auto bg-white p-3 sm:p-4 rounded-lg shadow-xl transform transition-all 
               duration-300 ease-in-out ${
-                isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                isOpen 
+                  ? "opacity-100 scale-100 pointer-events-auto" 
+                  : "opacity-0 scale-95 pointer-events-none"
               }`}
             onClick={this.handleCartClick}
           >
@@ -156,6 +157,7 @@ class CartOverlay extends Component {
               My Cart, {itemCount === 1 ? "1 Item" : `${itemCount} Items`}
             </h2>
 
+            {/* Rest of your existing cart overlay content... */}
             <div className="space-y-3 sm:space-y-4">
               {cartItems.map((item) => (
                 <div
