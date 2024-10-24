@@ -16,3 +16,6 @@ A test task implementation for Scandiweb featuring a single-page e-commerce appl
 
 ## Backend Repository
 [E-commerce Backend](https://github.com/Ali-Mohamed-Abdelmawla/Ecommerce.git)
+
+## Auto QA test
+![test passed](./scandi-web-QA-tool.png)
