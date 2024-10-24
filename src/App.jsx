@@ -168,7 +168,7 @@ class App extends Component {
   };
 
   toggleCart = () => {
-    this.setState((prevState) => ({ isCartOpen: !prevState.isCartOpen }));
+    this.setState({ isCartOpen: !this.state.isCartOpen });
   };
 
   placeOrder = () => {
