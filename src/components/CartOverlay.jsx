@@ -28,9 +28,23 @@ class CartOverlay extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.isOpen !== prevProps.isOpen) {
       if (this.props.isOpen) {
-        this.setState({ isRendered: true });
+        // When opening, render immediately and trigger animation
+        this.setState({ isRendered: true }, () => {
+          // Use requestAnimationFrame to ensure DOM has updated
+          requestAnimationFrame(() => {
+            this.setState({ isVisible: true });
+          });
+        });
       } else {
-        setTimeout(() => this.setState({ isRendered: false }), 300);
+        // When closing, start animation first
+        this.setState({ isVisible: false });
+        // Then remove from DOM after animation completes
+        setTimeout(() => {
+          if (!this.props.isOpen) {
+            // Double check we're still supposed to be closed
+            this.setState({ isRendered: false });
+          }
+        }, 300); // Match the duration in your CSS transition
       }
     }
   }
@@ -140,8 +154,8 @@ class CartOverlay extends Component {
   };
 
   render() {
+    const { isRendered, isVisible } = this.state;
     const {
-      isOpen,
       cartItems,
       total,
       currency,
@@ -150,7 +164,6 @@ class CartOverlay extends Component {
       itemCount,
       onOrderPlaced,
     } = this.props;
-    const { isRendered } = this.state;
 
     if (!isRendered) return null;
 
@@ -167,7 +180,9 @@ class CartOverlay extends Component {
             className={`fixed right-0 sm:right-4 top-14 z-50 w-full sm:w-96 max-h-[calc(100vh-5rem)] 
               overflow-y-auto bg-white p-3 sm:p-4 rounded-lg shadow-xl transform transition-all 
               duration-300 ease-in-out ${
-                isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                isVisible
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-95 pointer-events-none"
               }`}
             onClick={this.handleCartClick}
           >
