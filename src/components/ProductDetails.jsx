@@ -111,18 +111,21 @@ class ProductDetails extends Component {
                 <button
                   key={`${attribute.id}-${item.id}`}
                   onClick={() => this.selectAttribute(attribute.id, item.value)}
+                  data-testid={`product-attribute-${attribute.name.toLowerCase()}-${
+                    item.value
+                  }`}
                   className={`
-                    w-8 h-8 sm:w-10 sm:h-10
-                    rounded-full
-                    cursor-pointer
-                    transition-all duration-200
-                    relative
-                    ${
-                      isSelected
-                        ? "ring-2 ring-offset-2 ring-black scale-110"
-                        : "hover:scale-105"
-                    }
-                  `}
+        w-8 h-8 sm:w-10 sm:h-10
+        rounded-full
+        cursor-pointer
+        transition-all duration-200
+        relative
+        ${
+          isSelected
+            ? "ring-2 ring-offset-2 ring-black scale-110"
+            : "hover:scale-105"
+        }
+      `}
                   style={{
                     backgroundColor: item.value,
                     border: "2px solid #e5e7eb",
@@ -155,18 +158,21 @@ class ProductDetails extends Component {
               <button
                 key={`${attribute.id}-${item.id}`}
                 onClick={() => this.selectAttribute(attribute.id, item.value)}
+                data-testid={`product-attribute-${attribute.name.toLowerCase()}-${
+                  item.value
+                }`}
                 className={`
-                  px-3 sm:px-4 py-1 sm:py-2
-                  border-2 rounded
-                  transition-all duration-200
-                  text-sm sm:text-base
-                  font-medium
-                  ${
-                    isSelected
-                      ? "border-black bg-black text-white scale-105"
-                      : "border-gray-300 hover:border-gray-400 hover:bg-gray-50"
-                  }
-                `}
+      px-3 sm:px-4 py-1 sm:py-2
+      border-2 rounded
+      transition-all duration-200
+      text-sm sm:text-base
+      font-medium
+      ${
+        isSelected
+          ? "border-black bg-black text-white scale-105"
+          : "border-gray-300 hover:border-gray-400 hover:bg-gray-50"
+      }
+    `}
               >
                 {item.display_value}
               </button>
