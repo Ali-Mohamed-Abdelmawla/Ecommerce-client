@@ -24,6 +24,10 @@ class Header extends Component {
     this.setState(prevState => ({ mobileMenuOpen: !prevState.mobileMenuOpen }));
   };
 
+  getCategoryHref = (categoryName) => {
+    return `/${categoryName.toLowerCase()}`;
+  };
+
   render() {
     const {
       onCategoryChange,
@@ -50,7 +54,8 @@ class Header extends Component {
                   return (
                     <nav className="flex space-x-1">
                       {data.categories.map((category) => (
-                        <button
+                        <a
+                          href={this.getCategoryHref(category.name)}
                           key={category.id}
                           className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-300 ease-in-out
                             ${
@@ -58,7 +63,8 @@ class Header extends Component {
                                 ? "bg-green-500 text-white shadow-md"
                                 : "text-gray-700 hover:bg-green-100"
                             }`}
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.preventDefault();
                             onCategoryChange(category.id);
                             navigateToHome();
                           }}
@@ -69,7 +75,7 @@ class Header extends Component {
                           }
                         >
                           {category.name.toUpperCase()}
-                        </button>
+                        </a>
                       ))}
                     </nav>
                   );
@@ -103,7 +109,8 @@ class Header extends Component {
                   return (
                     <nav className="flex flex-col space-y-2">
                       {data.categories.map((category) => (
-                        <button
+                        <a
+                          href={this.getCategoryHref(category.name)}
                           key={category.id}
                           className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-300 ease-in-out
                             ${
@@ -111,7 +118,8 @@ class Header extends Component {
                                 ? "bg-green-500 text-white shadow-md"
                                 : "text-gray-700 hover:bg-green-100"
                             }`}
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.preventDefault();
                             onCategoryChange(category.id);
                             navigateToHome();
                             this.toggleMobileMenu();
@@ -123,7 +131,7 @@ class Header extends Component {
                           }
                         >
                           {category.name.toUpperCase()}
-                        </button>
+                        </a>
                       ))}
                     </nav>
                   );
