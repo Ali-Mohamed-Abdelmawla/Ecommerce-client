@@ -148,8 +148,8 @@ class CartOverlay extends Component {
               overflow-y-auto bg-white p-3 sm:p-4 rounded-lg shadow-xl transform transition-all 
               duration-300 ease-in-out ${
                 isOpen 
-                  ? "opacity-100 scale-100 pointer-events-auto" 
-                  : "opacity-0 scale-95 pointer-events-none"
+                  ? "opacity-100 scale-100 visible"
+                  : "opacity-0 scale-95 invisible hidden"
               }`}
             onClick={this.handleCartClick}
           >
