@@ -53,10 +53,14 @@ class CartOverlay extends Component {
             {attribute.items.map((item) => {
               const isSelected =
                 selectedAttributes[attribute.id] === item.value;
-              {/* const optionId = item.display_value
+              {
+                /* const optionId = item.display_value
                 .toLowerCase()
-                .replace(/\s+/g, "-"); */}
-              {/* const baseTestId = `cart-item-attribute-${attributeId}-${optionId}`; */}
+                .replace(/\s+/g, "-"); */
+              }
+              {
+                /* const baseTestId = `cart-item-attribute-${attributeId}-${optionId}`; */
+              }
 
               if (attribute.type === "swatch") {
                 return (
@@ -159,6 +163,7 @@ class CartOverlay extends Component {
       >
         {(createOrder, { loading, error }) => (
           <div
+            data-testid="cart-overlay"
             className={`fixed right-0 sm:right-4 top-14 z-50 w-full sm:w-96 max-h-[calc(100vh-5rem)] 
               overflow-y-auto bg-white p-3 sm:p-4 rounded-lg shadow-xl transform transition-all 
               duration-300 ease-in-out ${
