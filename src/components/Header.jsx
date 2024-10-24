@@ -87,7 +87,7 @@ class Header extends Component {
             </div>
             <div className="flex items-center">
               <button
-                data-testid="cart-btn"
+                data-testid='cart-btn'
                 onClick={toggleCart}
                 className="relative p-2 transition-transform duration-300 ease-in-out hover:scale-110"
               >
