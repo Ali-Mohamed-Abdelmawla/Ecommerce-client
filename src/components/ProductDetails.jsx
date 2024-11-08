@@ -192,7 +192,7 @@ class ProductDetails extends Component {
     return brightness > 128;
   };
 
-  // Enhanced UI for gallery and attributes rendering
+  // gallery and attributes rendering
   render() {
     const { productId } = this.props;
 
@@ -364,68 +364,6 @@ class ProductDetails extends Component {
                   </div>
                 </div>
               </div>
-
-              {/* Modal remains the same but with adjusted sizes */}
-              {this.state.isModalOpen && (
-                <div
-                  className="fixed inset-0 flex items-center justify-center 
-                    bg-black bg-opacity-75 z-50 p-4"
-                  onClick={this.toggleModal}
-                >
-                  <img
-                    src={gallery[this.state.currentImageIndex].image_url}
-                    alt={product.name}
-                    className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 rounded shadow-md"
-                  />
-                  {/* Modal navigation buttons */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      this.prevImage(gallery.length);
-                    }}
-                    className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 
-                      bg-black bg-opacity-50 p-2 sm:p-4 text-white"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-6 h-6 sm:w-8 sm:h-8"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 19l-7-7 7-7"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      this.nextImage(gallery.length);
-                    }}
-                    className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 
-                      bg-black bg-opacity-50 p-2 sm:p-4 text-white"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-6 h-6 sm:w-8 sm:h-8"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              )}
             </div>
           );
         }}
