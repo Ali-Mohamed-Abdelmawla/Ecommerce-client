@@ -1,3 +1,4 @@
+// src/components/CartOverlay.jsx
 import { Component } from "react";
 import PropTypes from "prop-types";
 import { gql } from "@apollo/client";
@@ -67,14 +68,6 @@ class CartOverlay extends Component {
             {attribute.items.map((item) => {
               const isSelected =
                 selectedAttributes[attribute.id] === item.value;
-              {
-                /* const optionId = item.display_value
-                .toLowerCase()
-                .replace(/\s+/g, "-"); */
-              }
-              {
-                /* const baseTestId = `cart-item-attribute-${attributeId}-${optionId}`; */
-              }
 
               if (attribute.type === "swatch") {
                 return (
