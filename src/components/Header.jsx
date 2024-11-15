@@ -1,42 +1,44 @@
-//  src/components/Header.jsx
+// Header.js
 import { Component } from "react";
-import { Query } from "@apollo/client/react/components";
-import { gql } from "@apollo/client";
 import PropTypes from "prop-types";
-import { PiShoppingCartLight } from "react-icons/pi";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import MenuComponent from "./HeaderPartials/MenuComponent";
+import CartButton from "./HeaderPartials/CartButton";
 import { FaBars } from "react-icons/fa";
 
-const GET_CATEGORIES = gql`
-  query GetCategories {
-    categories {
-      id
-      name
-      typename
-    }
-  }
-`;
+export function HeaderWrapper(props) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  return <Header {...props} navigate={navigate} location={location} />;
+}
 
 class Header extends Component {
-  state = {
-    mobileMenuOpen: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      mobileMenuOpen: false,
+    };
+  }
 
   toggleMobileMenu = () => {
     this.setState(prevState => ({ mobileMenuOpen: !prevState.mobileMenuOpen }));
   };
 
-  getCategoryHref = (categoryName) => {
-    return `/${categoryName.toLowerCase()}`;
+  handleCategoryClick = (categoryId) => {
+    this.props.onCategoryChange(categoryId);
+    this.props.navigate(`/category/${categoryId}`);
+    if (this.state.mobileMenuOpen) {
+      this.toggleMobileMenu();
+    }
+  };
+
+  isActiveCategory = (categoryId) => {
+    const { location } = this.props;
+    return location.pathname === `/category/${categoryId}`;
   };
 
   render() {
-    const {
-      onCategoryChange,
-      toggleCart,
-      navigateToHome,
-      activeCategory,
-      itemCount,
-    } = this.props;
+    const { toggleCart, itemCount } = this.props;
 
     return (
       <header className="bg-white shadow-md relative z-50">
@@ -47,97 +49,31 @@ class Header extends Component {
                 <FaBars className="w-6 h-6" />
               </button>
             </div>
+
             <div className="hidden md:block">
-              <Query query={GET_CATEGORIES}>
-                {({ loading, error, data }) => {
-                  if (loading) return <p>Loading...</p>;
-                  if (error) return <p>Error :(</p>;
-                  return (
-                    <nav className="flex space-x-1">
-                      {data.categories.map((category) => (
-                        <a
-                          href={this.getCategoryHref(category.name)}
-                          key={category.id}
-                          className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-300 ease-in-out
-                            ${
-                              activeCategory === category.id
-                                ? "bg-green-500 text-white shadow-md"
-                                : "text-gray-700 hover:bg-green-100"
-                            }`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            onCategoryChange(category.id);
-                            navigateToHome();
-                          }}
-                          data-testid={
-                            activeCategory === category.id
-                              ? "active-category-link"
-                              : "category-link"
-                          }
-                        >
-                          {category.name.toUpperCase()}
-                        </a>
-                      ))}
-                    </nav>
-                  );
-                }}
-              </Query>
+              <MenuComponent
+                onCategoryClick={this.handleCategoryClick}
+                isActiveCategory={this.isActiveCategory}
+              />
             </div>
+
             <div className="flex-grow flex justify-center">
-              <img src="/images/a-logo.svg" alt="Logo" className="h-8 md:h-10" />
+              <Link to="/" className="block">
+                <img src="/images/a-logo.svg" alt="Logo" className="h-8 md:h-10" />
+              </Link>
             </div>
+
             <div className="flex items-center">
-              <button
-                data-testid="cart-btn"
-                onClick={toggleCart}
-                className="relative p-2 transition-transform duration-300 ease-in-out hover:scale-110"
-              >
-                <PiShoppingCartLight className="w-6 h-6" />
-                {itemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-black text-white rounded-full w-5 h-5 flex items-center justify-center text-xs transition-all duration-300 ease-in-out animate-pulse">
-                    {itemCount >= 2 ? "x" : `${itemCount}`}
-                  </span>
-                )}
-              </button>
+              <CartButton toggleCart={toggleCart} itemCount={itemCount} />
             </div>
           </div>
+
           {this.state.mobileMenuOpen && (
             <div className="md:hidden mt-4">
-              <Query query={GET_CATEGORIES}>
-                {({ loading, error, data }) => {
-                  if (loading) return <p>Loading...</p>;
-                  if (error) return <p>Error :(</p>;
-                  return (
-                    <nav className="flex flex-col space-y-2">
-                      {data.categories.map((category) => (
-                        <a
-                          href={this.getCategoryHref(category.name)}
-                          key={category.id}
-                          className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-300 ease-in-out
-                            ${
-                              activeCategory === category.id
-                                ? "bg-green-500 text-white shadow-md"
-                                : "text-gray-700 hover:bg-green-100"
-                            }`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            onCategoryChange(category.id);
-                            navigateToHome();
-                            this.toggleMobileMenu();
-                          }}
-                          data-testid={
-                            activeCategory === category.id
-                              ? "active-category-link"
-                              : "category-link"
-                          }
-                        >
-                          {category.name.toUpperCase()}
-                        </a>
-                      ))}
-                    </nav>
-                  );
-                }}
-              </Query>
+              <MenuComponent
+                onCategoryClick={this.handleCategoryClick}
+                isActiveCategory={this.isActiveCategory}
+              />
             </div>
           )}
         </div>
@@ -149,10 +85,9 @@ class Header extends Component {
 Header.propTypes = {
   onCategoryChange: PropTypes.func.isRequired,
   toggleCart: PropTypes.func.isRequired,
-  navigateToHome: PropTypes.func.isRequired,
-  activeCategory: PropTypes.string,
   itemCount: PropTypes.number.isRequired,
-  isCartOpen: PropTypes.bool.isRequired,
+  navigate: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
-export default Header;
+export default HeaderWrapper;
