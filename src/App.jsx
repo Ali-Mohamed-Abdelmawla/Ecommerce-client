@@ -33,6 +33,12 @@ class App extends Component {
       placeOrder,
     } = this.context;
 
+    if (isCartOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
     const { activeCategory } = this.state;
     const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
