@@ -14,7 +14,7 @@ class CartButton extends Component {
       >
         <PiShoppingCartLight className="w-6 h-6" />
         {itemCount > 0 && (
-          <span className="absolute -top-2 -right-2 bg-black text-white rounded-full w-5 h-5 flex items-center justify-center text-xs transition-all duration-300 ease-in-out animate-pulse">
+          <span className="absolute p-3 -top-2 -right-2 bg-black text-white rounded-full w-4 h-4 flex items-center justify-center text-xs transition-all duration-300 ease-in-out">
             {itemCount >= 2 ? "x" : `${itemCount}`}
           </span>
         )}

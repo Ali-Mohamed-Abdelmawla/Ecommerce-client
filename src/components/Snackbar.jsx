@@ -1,6 +1,8 @@
-//  src/components/Snackbar.jsx
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Component } from "react";
+import PropTypes from "prop-types";
+
+const SNACKBAR_HEIGHT = 40;
+const SPACING = 8;
 
 class Snackbar extends Component {
   componentDidMount() {
@@ -14,15 +16,19 @@ class Snackbar extends Component {
   }
 
   render() {
+    const { message, index } = this.props;
+
     return (
-      <div 
+      <div
+        className="fixed right-4 bg-primary text-white px-4 py-2 rounded shadow-lg"
         style={{
-          bottom: `${this.props.index * 3}rem`, // Adjust this value to control spacing
-          transition: 'all 0.3s ease-in-out'
+          height: `${SNACKBAR_HEIGHT}px`,
+          bottom: `${16 + index * (SNACKBAR_HEIGHT + SPACING)}px`,
+          transition: "all 0.3s ease-out",
+          animation: "slideIn 0.3s ease-out forwards",
         }}
-        className="mb-4 fixed bottom-2 right-1 transform bg-primary text-white px-4 py-2 rounded shadow-lg animate-fade-in-up z-30"
       >
-        {this.props.message}
+        {message}
       </div>
     );
   }
@@ -32,11 +38,11 @@ Snackbar.propTypes = {
   message: PropTypes.string.isRequired,
   duration: PropTypes.number,
   onClose: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired // Add this prop
+  index: PropTypes.number.isRequired,
 };
 
 Snackbar.defaultProps = {
-  duration: 3000
+  duration: 3000,
 };
 
 export default Snackbar;

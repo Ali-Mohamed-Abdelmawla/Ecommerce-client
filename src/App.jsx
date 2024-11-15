@@ -97,13 +97,16 @@ class App extends Component {
             onOrderPlaced={placeOrder}
           />
 
-          {snackbars.map((snackbar) => (
-            <Snackbar
-              key={snackbar.id}
-              message={snackbar.message}
-              onClose={() => removeSnackbar(snackbar.id)}
-            />
-          ))}
+          <div className="fixed bottom-0 right-0 z-50">
+            {snackbars.map((snackbar, index) => (
+              <Snackbar
+                key={snackbar.id}
+                message={snackbar.message}
+                onClose={() => removeSnackbar(snackbar.id)}
+                index={index}
+              />
+            ))}
+          </div>
         </div>
       </BrowserRouter>
     );

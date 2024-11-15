@@ -14,14 +14,15 @@ body {
   font-family: 'Krypton', sans-serif;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @layer utilities {
@@ -32,14 +33,4 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.attribute-selected {
-  animation: pulse 0.3s ease-in-out;
 }
