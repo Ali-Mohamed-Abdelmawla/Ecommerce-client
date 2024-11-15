@@ -2,7 +2,7 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import { Mutation } from "@apollo/client/react/components";
-import { CREATE_ORDER_MUTATION } from "../graphql/mutations/createOrder";
+import { CREATE_ORDER_MUTATION } from "../graphql/mutations/CreateOrder";
 import CartItem from "./Cartpartials/CartItem";
 import CartTotal from "./Cartpartials/CartTotal";
 import OrderButton from "./Cartpartials/OrderButton";
