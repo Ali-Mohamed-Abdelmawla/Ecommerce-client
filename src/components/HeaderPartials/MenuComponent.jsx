@@ -16,7 +16,7 @@ class MenuComponent extends Component {
           return (
             <nav className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-1">
               {data.categories.map((category) => (
-                <button
+                <a
                   key={category.id}
                   className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-300 ease-in-out
                     ${isActiveCategory(category.id)
@@ -26,7 +26,7 @@ class MenuComponent extends Component {
                   onClick={() => onCategoryClick(category.id)}
                 >
                   {category.name.toUpperCase()}
-                </button>
+                </a>
               ))}
             </nav>
           );
