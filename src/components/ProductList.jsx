@@ -41,7 +41,7 @@ ProductList.propTypes = {
   categoryId: PropTypes.string.isRequired,
   addToCart: PropTypes.func.isRequired,
   navigateToProduct: PropTypes.func.isRequired,
-  toggleCart: PropTypes.func.isRequired // Added this prop
+  toggleCart: PropTypes.func.isRequired
 };
 
 export default ProductList;

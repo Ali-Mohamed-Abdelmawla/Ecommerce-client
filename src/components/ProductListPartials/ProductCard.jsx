@@ -16,10 +16,10 @@ class ProductCard extends Component {
 
     return (
       <div
-        className={`relative group transition-all duration-300 ease-in-out 
-          transform hover:-translate-y-1 sm:hover:-translate-y-2 
-          ${!product.inStock ? "opacity-50" : ""} 
-          border border-gray-200 rounded-lg overflow-hidden 
+        className={`relative group transition-all duration-300 ease-in-out
+          transform hover:-translate-y-1 sm:hover:-translate-y-2
+          ${!product.inStock ? "opacity-50" : ""}
+          border border-gray-200 rounded-lg overflow-hidden
           shadow-md hover:shadow-lg cursor-pointer`}
         data-testid={productTestId}
         onClick={() => navigateToProduct(product.id)}
