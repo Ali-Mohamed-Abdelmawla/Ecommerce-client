@@ -3,18 +3,35 @@ import { Component } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import PropTypes from 'prop-types';
+import { Query } from '@apollo/client/react/components';
+import { Navigate } from 'react-router-dom';
+import { GET_CATEGORIES } from '../graphql/queries/GetCategories';
 
 export function ProductListWrapper({ addToCart, toggleCart }) {
-  const { categoryId } = useParams();
+  const { categoryName } = useParams();
   const navigate = useNavigate();
-  
+
   return (
-    <ProductListClass 
-      categoryId={categoryId}
-      addToCart={addToCart}
-      toggleCart={toggleCart}
-      navigate={navigate}
-    />
+    <Query query={GET_CATEGORIES}>
+      {({ loading, error, data }) => {
+        if (loading || error) return null;
+
+        const category = data.categories.find(
+          cat => cat.name.toLowerCase() === categoryName.toLowerCase()
+        );
+
+        if (!category) return <Navigate to="/" />;
+
+        return (
+          <ProductListClass 
+            categoryId={category.id}
+            addToCart={addToCart}
+            toggleCart={toggleCart}
+            navigate={navigate}
+          />
+        );
+      }}
+    </Query>
   );
 }
 

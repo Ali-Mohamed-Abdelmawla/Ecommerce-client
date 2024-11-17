@@ -24,17 +24,17 @@ class Header extends Component {
     this.setState(prevState => ({ mobileMenuOpen: !prevState.mobileMenuOpen }));
   };
 
-  handleCategoryClick = (categoryId) => {
+  handleCategoryClick = (categoryId, categoryName) => {
     this.props.onCategoryChange(categoryId);
-    this.props.navigate(`/category/${categoryId}`);
+    this.props.navigate(`/${categoryName.toLowerCase()}`);
     if (this.state.mobileMenuOpen) {
       this.toggleMobileMenu();
     }
   };
 
-  isActiveCategory = (categoryId) => {
+  isActiveCategory = (categoryName) => {
     const { location } = this.props;
-    return location.pathname === `/category/${categoryId}`;
+    return location.pathname === `/${categoryName.toLowerCase()}`;
   };
 
   render() {

@@ -65,31 +65,31 @@ class App extends Component {
             )}
 
             <div className="relative z-10">
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Navigate to={`/category/${activeCategory}`} />}
-                />
-                <Route
-                  path="/category/:categoryId"
-                  element={
-                    <ProductListWrapper
-                      addToCart={this.context.addToCart}
-                      toggleCart={toggleCart}
-                    />
-                  }
-                />
-                <Route
-                  path="/product/:productId"
-                  element={
-                    <ProductDetailsWrapper
-                      addToCart={this.context.addToCart}
-                      toggleCart={toggleCart}
-                    />
-                  }
-                />
-                <Route path="*" element={<div>Page not found</div>} />
-              </Routes>
+            <Routes>
+              <Route
+                path="/"
+                element={<Navigate to="/all" />}
+              />
+              <Route
+                path="/:categoryName"
+                element={
+                  <ProductListWrapper
+                    addToCart={this.context.addToCart}
+                    toggleCart={toggleCart}
+                  />
+                }
+              />
+              <Route
+                path="/product/:productId"
+                element={
+                  <ProductDetailsWrapper
+                    addToCart={this.context.addToCart}
+                    toggleCart={toggleCart}
+                  />
+                }
+              />
+              <Route path="*" element={<div>Page not found</div>} />
+            </Routes>
             </div>
           </div>
 
